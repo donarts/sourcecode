@@ -1,0 +1,45 @@
+<!--https://api.jquery.com/click/-->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>calc flask demo</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+ 
+<input type="text" id="txt1" name="inputdata"></input>
+<button id="btn1">submit</button>
+
+<div id="result1">
+</div>
+
+</p>
+
+<script>
+$( "#btn1" ).click(function() {
+	var txt1_v = $('#txt1').val();
+	var postdata = {
+		'inputdata':txt1_v
+	}
+	<!--alert( "Handler for .click() called." );-->
+	$.ajax({
+		type: 'POST',
+		url: '{{url_for("ajax_page")}}',
+		data: JSON.stringify(postdata),
+		dataType : 'JSON',
+		contentType: "application/json",
+		success: function(data){
+			$("#result1").text("result:"+data['inputdata'] + '=' + data['rlt']);
+			<!--alert('success :' + data['inputdata'] + '=' + data['rlt'])-->
+		},
+		error: function(request, status, error){
+			alert('ajax error:['+status+']['+error+']')
+		}
+	})
+});
+
+</script>
+ 
+</body>
+</html>
