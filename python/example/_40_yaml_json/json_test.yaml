@@ -1,0 +1,26 @@
+alias:
+  bar: baz
+alias_reuse:
+  bar: baz
+content: 'Or we
+
+  can auto
+
+  convert line breaks
+
+  to save space'
+json:
+- rigid
+- better for data interchange
+object:
+  array:
+  - null_value: null
+  - boolean: true
+  - integer: 1
+  - alias: aliases are like variables
+  - alias: aliases are like variables
+  key: value
+paragraph: "Blank lines denote \nparagraph breaks\n"
+yaml:
+- slim and flexible
+- better for configuration
