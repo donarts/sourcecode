@@ -67,7 +67,7 @@ class adb_utils_rp():
 	def check_event_log(self):
 		find_str = "(am_crash)|(am_anr)"
 		ret = self.get_event_log()
-		ret = " \n\n\n\n am_cras \n  am_anr "
+		#ret = " \n\n\n\n am_cras \n  am_anr "
 		finded = re.search(find_str,ret)
 		return finded
 		
