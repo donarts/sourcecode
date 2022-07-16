@@ -2,3 +2,6 @@
 python/ml/ignore/*
 *.pyc
 python/github-env/*
+.idea/*
+DB Browser for SQLite/*
+mygithub.egg-info/*
