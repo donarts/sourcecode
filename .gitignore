@@ -10,3 +10,7 @@ pytorch/00_data_loader/y_data.csv
 pytorch/01_basic/x_data.csv
 pytorch/01_basic/y_data.csv
 pytorch/01_basic/losses.png
+pytorch/02_basic_gen_train_test/losses.png
+pytorch/02_basic_gen_train_test/model.pickle
+pytorch/02_basic_gen_train_test/x_data.csv
+pytorch/02_basic_gen_train_test/y_data.csv
