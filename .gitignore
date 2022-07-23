@@ -9,3 +9,4 @@ pytorch/00_data_loader/x_data.csv
 pytorch/00_data_loader/y_data.csv
 pytorch/01_basic/x_data.csv
 pytorch/01_basic/y_data.csv
+pytorch/01_basic/losses.png
