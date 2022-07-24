@@ -108,8 +108,8 @@ for epoch in range(n_epochs):
     
     with torch.no_grad():
         for x_val, y_val in val_loader:
-            x_val = x_batch.float()
-            y_val = y_batch.float()
+            x_val = x_val.float()
+            y_val = y_val.float()
             x_val = x_val.to(device)
             y_val = y_val.to(device)
             
