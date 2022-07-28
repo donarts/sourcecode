@@ -14,3 +14,4 @@ pytorch/02_basic_gen_train_test/losses.png
 pytorch/02_basic_gen_train_test/model.pickle
 pytorch/02_basic_gen_train_test/x_data.csv
 pytorch/02_basic_gen_train_test/y_data.csv
+pytorch/02_basic_gen_train_test/model.pt

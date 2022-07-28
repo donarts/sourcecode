@@ -6,7 +6,6 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch.utils.data.dataset import random_split
 import matplotlib.pyplot as plt
-import pickle
 
 batch_size = 100
 lr = 1e-1
@@ -86,56 +85,56 @@ def make_train_step(model, loss_fn, optimizer):
     return train_step
 
 
-model = CustomModel().to(device)
-loss_fn = nn.MSELoss(reduction='mean')
-print(model.parameters())
-optimizer = optim.SGD(model.parameters(), lr=lr)
+if __name__ == '__main__':
+    model = CustomModel().to(device)
+    loss_fn = nn.MSELoss(reduction='mean')
+    print(model.parameters())
+    optimizer = optim.SGD(model.parameters(), lr=lr)
 
-# Creates the train_step function for our model, loss function and optimizer
-train_step = make_train_step(model, loss_fn, optimizer)
-losses = []
-val_losses = []
+    # Creates the train_step function for our model, loss function and optimizer
+    train_step = make_train_step(model, loss_fn, optimizer)
+    losses = []
+    val_losses = []
 
-for epoch in range(n_epochs):
-    print(f"epoch ##{epoch}")
-    for x_batch, y_batch in train_loader:
-        x_batch = x_batch.float()
-        y_batch = y_batch.float()
-        x_batch = x_batch.to(device)
-        y_batch = y_batch.to(device)
-        loss = train_step(x_batch, y_batch)
-        losses.append(loss)
-    
-    with torch.no_grad():
-        for x_val, y_val in val_loader:
-            x_val = x_val.float()
-            y_val = y_val.float()
-            x_val = x_val.to(device)
-            y_val = y_val.to(device)
-            
-            model.eval()
+    for epoch in range(n_epochs):
+        print(f"epoch ##{epoch}")
+        for x_batch, y_batch in train_loader:
+            x_batch = x_batch.float()
+            y_batch = y_batch.float()
+            x_batch = x_batch.to(device)
+            y_batch = y_batch.to(device)
+            loss = train_step(x_batch, y_batch)
+            losses.append(loss)
 
-            yhat = model(x_val)
-            val_loss = loss_fn(y_val, yhat)
-            val_losses.append(val_loss.item())
+        with torch.no_grad():
+            for x_val, y_val in val_loader:
+                x_val = x_val.float()
+                y_val = y_val.float()
+                x_val = x_val.to(device)
+                y_val = y_val.to(device)
 
-with open("model.pickle", "wb") as f:
-    pickle.dump(model, f)
+                model.eval()
 
-print(model.state_dict())
+                yhat = model(x_val)
+                val_loss = loss_fn(y_val, yhat)
+                val_losses.append(val_loss.item())
 
-fig, ax = plt.subplots()
-ax.plot(losses)
-ax.plot(val_losses)
-plt.savefig("losses.png")
+    torch.save(model.state_dict(), "model.pt")
 
-# test
-model.eval()
-x_prd = np.array([0.1, 0.2, 0.1]) # y = 1 + 2*0.1*0.2*0.1
-print("expect:",1 + 2*0.1*0.2*0.1)
-x_prd = torch.from_numpy(x_prd)
-x_prd = x_prd.float()
-x_prd = x_prd.to(device)
-print(model(x_prd))
-# y는 원하는 값 목표값인 label로 표현합니다.
-# 아래 방정식은 모르는 상태에서 학습을 통해 알아내는 것이 머신러닝이다.
+    print(model.state_dict())
+
+    fig, ax = plt.subplots()
+    ax.plot(losses)
+    ax.plot(val_losses)
+    plt.savefig("losses.png")
+
+    # test
+    model.eval()
+    x_prd = np.array([0.1, 0.2, 0.1]) # y = 1 + 2*0.1*0.2*0.1
+    print("expect:",1 + 2*0.1*0.2*0.1)
+    x_prd = torch.from_numpy(x_prd)
+    x_prd = x_prd.float()
+    x_prd = x_prd.to(device)
+    print(model(x_prd))
+    # y는 원하는 값 목표값인 label로 표현합니다.
+    # 아래 방정식은 모르는 상태에서 학습을 통해 알아내는 것이 머신러닝이다.
