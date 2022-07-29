@@ -71,7 +71,7 @@ def make_train_step(model, loss_fn, optimizer):
         # Makes predictions
         yhat = model(x)
         # Computes loss
-        loss = loss_fn(y, yhat)
+        loss = loss_fn(yhat, y)
         # zeroes gradients
         optimizer.zero_grad()
         # Computes gradients
