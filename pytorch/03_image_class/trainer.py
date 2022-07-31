@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import os
 from torchvision import transforms
 from PIL import Image
+from torchinfo import summary
 
 batch_size = 20
 lr = 1e-3
@@ -171,6 +172,7 @@ if __name__ == '__main__':
     train_step = make_train_step(model, loss_fn, optimizer)
     losses = []
     val_losses = []
+    summary(model, input_size=(batch_size, 3, 150, 150))
 
     for epoch in range(n_epochs):
         epoch_loss = 0.0
