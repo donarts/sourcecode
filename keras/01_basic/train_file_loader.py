@@ -96,7 +96,7 @@ INPUT_OPTIMIZER = tf.keras.optimizers.SGD(learning_rate=lr)
 LOSS = tf.keras.losses.MeanSquaredError(reduction="auto", name="mean_squared_error")
 model.compile(optimizer=INPUT_OPTIMIZER, loss=LOSS)
 model.fit(train_loader, batch_size=batch_size, epochs=n_epochs, validation_data=val_loader)
-
+model.save("model.keras")
 
 
 # y = 1 + 2*0.1*0.2*0.1
