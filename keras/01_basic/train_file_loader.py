@@ -82,6 +82,7 @@ print(len(temp_dataset), train_dataset_cnt, val_dataset_cnt)
 train_loader = CustomDataloader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = CustomDataloader(val_dataset, batch_size=batch_size, shuffle=True)
 
+# https://keras.io/api/layers/
 inputs = keras.Input(shape=(None, 3))
 x = layers.Dense(6, activation="linear")(inputs)
 x = layers.Dense(1, activation="linear")(x)
