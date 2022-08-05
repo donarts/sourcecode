@@ -21,3 +21,5 @@ pytorch/03_image_class/losses.png
 pytorch/03_image_class/model.pt
 keras/00_data_loader/x_data.csv
 keras/00_data_loader/y_data.csv
+keras/01_basic/x_data.csv
+keras/01_basic/y_data.csv
