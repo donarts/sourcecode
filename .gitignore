@@ -24,3 +24,6 @@ keras/00_data_loader/y_data.csv
 keras/01_basic/x_data.csv
 keras/01_basic/y_data.csv
 keras/01_basic/model.keras
+keras/02_image_class/cats_and_dogs_filtered.zip
+keras/02_image_class/cats_and_dogs_filtered/*
+keras/02_image_class/model.keras
