@@ -27,3 +27,14 @@ keras/01_basic/model.keras
 keras/02_image_class/cats_and_dogs_filtered.zip
 keras/02_image_class/cats_and_dogs_filtered/*
 keras/02_image_class/model.keras
+keras/03_rnn_ltsm/tester.png
+keras/03_rnn_ltsm/x_data.csv
+keras/03_rnn_ltsm/y_data.csv
+keras/03_rnn_ltsm/timed_y_data.csv
+keras/03_rnn_ltsm/timed_y_data.png
+keras/03_rnn_ltsm/model_lstm.keras
+keras/03_rnn_ltsm/model_nn.keras
+keras/03_rnn_ltsm/model_rnn.keras
+keras/03_rnn_ltsm/readme.txt
+keras/03_rnn_ltsm/y_list.png
+keras/03_rnn_ltsm/sample.py
