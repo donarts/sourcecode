@@ -38,3 +38,8 @@ keras/03_rnn_ltsm/model_rnn.keras
 keras/03_rnn_ltsm/readme.txt
 keras/03_rnn_ltsm/y_list.png
 keras/03_rnn_ltsm/sample.py
+keras/04_rnn_char/char_to_index.pickle
+keras/04_rnn_char/index_to_char.pickle
+keras/04_rnn_char/model_lstm.keras
+keras/04_rnn_char/x_data.txt
+keras/04_rnn_char/y_data.txt
