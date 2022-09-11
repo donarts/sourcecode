@@ -43,3 +43,5 @@ keras/04_rnn_char/index_to_char.pickle
 keras/04_rnn_char/model_lstm.keras
 keras/04_rnn_char/x_data.txt
 keras/04_rnn_char/y_data.txt
+music/00_data/lpd_full.tar.gz
+music/00_data/lpd_full/*
