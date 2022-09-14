@@ -45,3 +45,4 @@ keras/04_rnn_char/x_data.txt
 keras/04_rnn_char/y_data.txt
 music/00_data/lpd_full.tar.gz
 music/00_data/lpd_full/*
+python/example/_46_sqlite/test.db
