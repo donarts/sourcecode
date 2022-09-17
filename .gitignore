@@ -46,3 +46,13 @@ keras/04_rnn_char/y_data.txt
 music/00_data/lpd_full.tar.gz
 music/00_data/lpd_full/*
 python/example/_46_sqlite/test.db
+python/example/_42_7z/out/output1.7z.0002
+python/example/_42_7z/out/output1.7z.0003
+python/example/_42_7z/out/output1.7z.0004
+python/example/_42_7z/out/output2.7z.0001
+python/example/_42_7z/out/output2.7z.0002
+python/example/_42_7z/out/output3.7z.0001
+python/example/_42_7z/out/output3.7z.0002
+python/example/_42_7z/out/output3.7z.0003
+python/example/_42_7z/out/output4.7z.0001
+python/example/_42_7z/out/output4.7z.0002
