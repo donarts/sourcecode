@@ -81,11 +81,11 @@ class sqlite_dict():
         except sqlite3.OperationalError as ex:
             if str(ex).startswith("no such table:"):
                 cursor.close()
-                return None
+                return None, None
         row = cursor.fetchone()
         cursor.close()
         if row is None:
-            return None
+            return None, None
         # print("debug:",row)
         dict_data = json.loads(row[0])
         timestamp = row[1]
@@ -100,11 +100,11 @@ class sqlite_dict():
         except sqlite3.OperationalError as ex:
             if str(ex).startswith("no such table:"):
                 cursor.close()
-                return None
+                return None, None
         rows = cursor.fetchall()
         cursor.close()
         if rows is None:
-            return None
+            return None, None
         ret = {}
         ret_tp = {}
         # print("debug:",rows)
