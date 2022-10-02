@@ -16,7 +16,7 @@ def write_file(filename, data):
 		elif format == 'yaml':
 			yaml.dump(data, fp)
 		else:
-			fp.write(str_data)
+			fp.write(data)
 		fp.close()
 
 def write_json(filename, data):
