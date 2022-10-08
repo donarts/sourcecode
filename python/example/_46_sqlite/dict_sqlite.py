@@ -50,6 +50,8 @@ class sqlite_dict():
         for key in dict_data:
             value = dict_data[key]
             json_dump = json.dumps(value)
+            json_dump = str(json_dump)
+            json_dump = json_dump.replace("'", "''")
             print(f"{key}//{json_dump}")
             try:
                 cur.execute(f"INSERT INTO '{self.table_name}' VALUES ('{nowtime}','{key}','{json_dump}')")
