@@ -12,4 +12,4 @@ driver.get("https://www.naver.com")
 
 driver.implicitly_wait(3)
 
-print(driver.content)
+print(driver.page_source)

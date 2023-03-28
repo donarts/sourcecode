@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import os
+import sys
 
 class selenium_v1:
 	def __init__(self):
@@ -16,10 +17,14 @@ class selenium_v1:
 		options.add_experimental_option('excludeSwitches',['enable-logging'])
 		
 		if headless:
-			options.add_argument('headless')
+			# options.add_argument('headless')
+			# for chrome driver version up
+			options.add_argument('headless=new')
 		
 		if download_path!=None:
 			self.download_path = os.path.abspath(download_path)
+			if sys.platform.startswith('win'):
+				self.download_path = self.download_path.replace("/", "\\")
 			prefs = {"download.default_directory":self.download_path}
 			options.add_experimental_option("prefs",prefs)
 		
@@ -79,13 +84,13 @@ class selenium_v1:
 			f = open(filename, 'w', encoding = 'utf-8')
 			f.write(html)
 			f.close()
-		except:
-			print("exception",e)
+		except Exception as e:
+			print("exception", e)
 		return 0
 		
 if __name__ == "__main__":
 	sel = selenium_v1()
-	sel.create_web_driver_chrome(headless=True,download_path=".")
+	sel.create_web_driver_chrome(headless=True, download_path=".")
 	print(sel.get("https://www.daum.net"))
 	print(sel.driver.page_source)
 	print(sel.get("https://www.python.org/ftp/python/3.9.11/python-3.9.11-embed-amd64.zip"))
