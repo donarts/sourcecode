@@ -129,7 +129,34 @@ class sqlite_dict():
         if rows is None:
             return None, None
         ret = []
-        #print("debug:",rows)
+        # print("debug:",rows)
+        for row in rows:
+            ret.append(row[0])
+        return ret
+
+    # 페이지 단위로 데이터를 얻는다.
+    # SELECT column FROM table ORDER BY somethingelse LIMIT 25, 50
+    # asc : True 이면 오래된 데이터 순으로 나온다.
+    def get_page_keys(self, page_number, page_size, asc=False):
+        if not self.is_connect:
+            self.connect()
+        cursor = self.con.cursor()
+        asc_str = "DESC"
+        page_from = page_size * page_number
+        if asc:
+            asc_str = "ASC"
+        try:
+            cursor.execute(f"SELECT dict_key FROM '{self.table_name}' ORDER BY timestamp {asc_str} LIMIT {page_from}, {page_size}")
+        except sqlite3.OperationalError as ex:
+            if str(ex).startswith("no such table:"):
+                cursor.close()
+                return None, None
+        rows = cursor.fetchall()
+        cursor.close()
+        if rows is None:
+            return None, None
+        ret = []
+        # print("debug:",rows)
         for row in rows:
             ret.append(row[0])
         return ret
@@ -195,18 +222,18 @@ class sqlite_dict():
     # -60 : -60 초 이전 레코드 삭제
     def del_old_record(self, time_old_sec):
         nowtime = datetime.datetime.now().timestamp()
-        print(nowtime+time_old_sec)
+        print(nowtime + time_old_sec)
         if not self.is_connect:
             self.connect()
         cursor = self.con.cursor()
         try:
-            cursor.execute(f"SELECT * FROM '{self.table_name}' WHERE timestamp < {nowtime+time_old_sec}")
+            cursor.execute(f"SELECT * FROM '{self.table_name}' WHERE timestamp < {nowtime + time_old_sec}")
         except sqlite3.OperationalError as ex:
             if str(ex).startswith("no such table:"):
                 cursor.close()
                 return -1
         rows = cursor.fetchall()
-        #print(rows)
+        # print(rows)
         cursor.close()
         count = 0
         if rows is not None:
@@ -214,6 +241,7 @@ class sqlite_dict():
                 self.del_key(row[1])
                 count = count + 1
         return count
+
 
 if __name__ == "__main__":
     try:
@@ -257,6 +285,39 @@ if __name__ == "__main__":
     print("get_count_all", sd.get_count_all())
     print("get_all_keys", sd.get_all_keys())
     sd.close()
+    try:
+        os.remove("test.db")
+    except:
+        pass
+    sd = sqlite_dict("test.db")
+    sd.connect()
+    sd.set_table_name("test_table")
+
+    sd.save_dict({"a": 1}, dupkey_process="forced")
+    time.sleep(0.1) # 시간 정보를 빼면 입력한 시간이 같아지는 경우가 발생하여 순서가 섞일 수 있음
+    sd.save_dict({"b": 2}, dupkey_process="forced")
+    time.sleep(0.1)
+    sd.save_dict({"c": 3}, dupkey_process="forced")
+    time.sleep(0.1)
+    sd.save_dict({"d": 4}, dupkey_process="forced")
+    time.sleep(0.1)
+    sd.save_dict({"e": 5}, dupkey_process="forced")
+    time.sleep(0.1)
+    sd.save_dict({"f": 6}, dupkey_process="forced")
+    time.sleep(0.1)
+    sd.save_dict({"g": 7}, dupkey_process="forced")
+
+    print("get_page_keys 0", sd.get_page_keys(0, 3))
+    print("get_page_keys 1", sd.get_page_keys(1, 3))
+    print("get_page_keys 2", sd.get_page_keys(2, 3))
+    print("get_page_keys 3", sd.get_page_keys(3, 3))
+
+    print("get_page_keys 0 asc", sd.get_page_keys(0, 3, asc=True))
+    print("get_page_keys 1 asc", sd.get_page_keys(1, 3, asc=True))
+    print("get_page_keys 2 asc", sd.get_page_keys(2, 3, asc=True))
+    print("get_page_keys 3 asc", sd.get_page_keys(3, 3, asc=True))
+
+    sd.close()
 
 '''
 3
@@ -289,4 +350,15 @@ del_old_record 1
 alldata ({'def': ['def', 2, '한글', {'test': 't1'}], 'ccc': 4}, {'def': 1663198451.982047, 'ccc': 1663198453.002805})
 get_count_all 2
 get_all_keys ['ccc', 'def']
+
+
+get_page_keys 0 ['g', 'f', 'e']
+get_page_keys 1 ['d', 'c', 'b']
+get_page_keys 2 ['a']
+get_page_keys 3 []
+get_page_keys 0 asc ['a', 'b', 'c']
+get_page_keys 1 asc ['d', 'e', 'f']
+get_page_keys 2 asc ['g']
+get_page_keys 3 asc []
+
 '''
