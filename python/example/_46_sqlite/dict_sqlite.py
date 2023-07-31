@@ -1,4 +1,3 @@
-import os
 import sqlite3
 import json
 import datetime
@@ -114,6 +113,26 @@ class sqlite_dict():
             ret[row[1]] = json.loads(row[2])
             ret_tp[row[1]] = row[0]
         return ret, ret_tp
+
+    def get_all_keys(self):
+        if not self.is_connect:
+            self.connect()
+        cursor = self.con.cursor()
+        try:
+            cursor.execute(f"SELECT dict_key FROM '{self.table_name}'")
+        except sqlite3.OperationalError as ex:
+            if str(ex).startswith("no such table:"):
+                cursor.close()
+                return None, None
+        rows = cursor.fetchall()
+        cursor.close()
+        if rows is None:
+            return None, None
+        ret = []
+        #print("debug:",rows)
+        for row in rows:
+            ret.append(row[0])
+        return ret
 
     # 삭제한 레코드 갯수
     def del_key(self, find_key):
@@ -236,6 +255,7 @@ if __name__ == "__main__":
     print("del_old_record", sd.del_old_record(-5))
     print("alldata", sd.get_all_data())
     print("get_count_all", sd.get_count_all())
+    print("get_all_keys", sd.get_all_keys())
     sd.close()
 
 '''
@@ -268,4 +288,5 @@ del kbz 1
 del_old_record 1
 alldata ({'def': ['def', 2, '한글', {'test': 't1'}], 'ccc': 4}, {'def': 1663198451.982047, 'ccc': 1663198453.002805})
 get_count_all 2
+get_all_keys ['ccc', 'def']
 '''
