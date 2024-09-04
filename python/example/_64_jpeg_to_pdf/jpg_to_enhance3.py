@@ -1,4 +1,4 @@
-filename=r'D:\temp\1\0676.jpg'
+filename=r'D:\temp\0005.jpg'
 
 import cv2
 import numpy as np
@@ -20,13 +20,20 @@ bilateral_filtered_image = cv2.bilateralFilter(sharpened_image, d=9, sigmaColor=
 # 3. Grayscale 변환
 gray = cv2.cvtColor(bilateral_filtered_image, cv2.COLOR_RGB2GRAY)
 
+# 4. GaussianBlur 적용 (Thresholding 전에)
+gray = cv2.GaussianBlur(gray, (5, 5), 0)
+
 # Otsu's Thresholding을 사용하여 글씨와 배경 분리
 # Otsu's Method는 최적의 threshold 값을 자동으로 선택함
-_, mask = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+#_, mask = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+# Adaptive Thresholding을 사용하여 글씨와 배경 분리
+mask = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                             cv2.THRESH_BINARY_INV, 41, 8)
 
 # 선택된 Otsu Threshold 값 출력
-otsu_threshold_value = _  # Otsu가 선택한 최적의 Threshold 값
-print(f"Otsu's Threshold Value: {otsu_threshold_value}")
+#otsu_threshold_value = _  # Otsu가 선택한 최적의 Threshold 값
+#print(f"Otsu's Threshold Value: {otsu_threshold_value}")
 
 # 배경 마스크를 생성 (글씨가 있는 부분은 제외)
 background_mask = cv2.bitwise_not(mask)
@@ -41,7 +48,9 @@ final_image = cv2.add(background_brightened, cv2.bitwise_and(bilateral_filtered_
 # 결과 출력
 plt.figure(figsize=(18, 6))
 plt.subplot(131), plt.imshow(image_rgb), plt.title('Original')
-plt.subplot(132), plt.imshow(bilateral_filtered_image), plt.title('Sharpened + Bilateral Filtered')
+#plt.subplot(132), plt.imshow(bilateral_filtered_image), plt.title('Sharpened + Bilateral Filtered')
+plt.subplot(132), plt.imshow(mask, cmap='gray'), plt.title('mask')
+#plt.subplot(132), plt.imshow(gray, cmap='gray'), plt.title('gray')
 plt.subplot(133), plt.imshow(final_image), plt.title('Background Brightened with Otsu Thresholding')
 plt.axis('off')
 plt.show()
