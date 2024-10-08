@@ -51,8 +51,8 @@ def jpgs_to_pdf(folder_path, output_pdf_path):
         first_image.save(output_pdf_path, save_all=True, append_images=images)
 
 # 사용 예시
-folder_path = r"D:/temp/1"
-output_pdf_path = 'D:/temp/1/output.pdf'  # 생성될 PDF 파일 경로
+folder_path = r"D:/temp/output"
+output_pdf_path = 'D:/temp/output.pdf'  # 생성될 PDF 파일 경로
 jpgs_to_pdf(folder_path, output_pdf_path)
 
 print(f"{output_pdf_path} 파일이 생성되었습니다.")
