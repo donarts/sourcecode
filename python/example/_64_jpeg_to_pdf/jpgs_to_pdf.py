@@ -3,10 +3,7 @@ from PIL import Image
 import natsort
 from collections import Counter
 
-#특정 폴더의 jpg 파일들을 모두 하나의 pdf 파일로 묶습니다.
-#이때 가로 크기를 모두 같은 크기로 변경합니다.
-
-def jpgs_to_pdf(folder_path, output_pdf_path):
+def jpgs_to_pdf(folder_path, output_pdf_path, jpeg_quality=100, crop_percent=0.0):
     # 지정된 폴더에서 JPG 파일 리스트 가져오기
     jpg_files = [f for f in natsort.natsorted(os.listdir(folder_path)) if f.lower().endswith('.jpg')]
     print(jpg_files)
@@ -36,23 +33,39 @@ def jpgs_to_pdf(folder_path, output_pdf_path):
         img_path = os.path.join(folder_path, jpg_file)
         img = Image.open(img_path)
 
+        # 이미지 크롭
+        if crop_percent > 0:
+            crop_amount_w = int(img.width * crop_percent)
+            crop_amount_h = int(img.height * crop_percent)
+            img = img.crop((
+                crop_amount_w,
+                crop_amount_h,
+                img.width - crop_amount_w,
+                img.height - crop_amount_h
+            ))
+
+        # 이미지 리사이즈
         if smallest_width != img.width:
             # 비율에 맞춰 리사이즈
             aspect_ratio = img.height / img.width
             new_height = int(smallest_width * aspect_ratio)
-            resized_img = img.resize((smallest_width, new_height), Image.LANCZOS)
-            images.append(resized_img.convert('RGB'))  # RGB로 변환
-        else:
-            images.append(img.convert('RGB'))  # RGB로 변환
+            img = img.resize((smallest_width, new_height), Image.LANCZOS)
+
+        # RGB로 변환 후 리스트에 추가
+        images.append(img.convert('RGB'))
 
     if images:
-        # 첫 번째 이미지를 기반으로 PDF 생성
+        # 첫 번째 이미지를 기반으로 PDF 생성 (JPEG 압축률 적용)
         first_image = images.pop(0)
-        first_image.save(output_pdf_path, save_all=True, append_images=images)
+        first_image.save(output_pdf_path, save_all=True, append_images=images, quality=jpeg_quality)
 
 # 사용 예시
 folder_path = r"D:/temp/output"
 output_pdf_path = 'D:/temp/output.pdf'  # 생성될 PDF 파일 경로
-jpgs_to_pdf(folder_path, output_pdf_path)
+
+jpeg_quality = 50  # JPEG 압축률 (0에서 100 사이의 값, 100이 가장 높은 품질)
+crop_percent = 0.03  # 이미지 상하좌우에서 자를 비율
+
+jpgs_to_pdf(folder_path, output_pdf_path, jpeg_quality, crop_percent)
 
 print(f"{output_pdf_path} 파일이 생성되었습니다.")
