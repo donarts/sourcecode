@@ -1,0 +1,30 @@
+{"input": "오늘 날씨가 정말 좋다. 하늘이 맑아서 기분이 상쾌하다. 오랜만에 산책을 나갔다.", "cluster_id": 0}
+{"input": "비가 하루 종일 내렸다. 우산을 챙기지 않아서 옷이 다 젖었다. 날씨가 우울하다.", "cluster_id": 1}
+{"input": "기온이 갑자기 떨어졌다. 바람도 많이 불어서 체감 온도가 낮다.", "cluster_id": 1}
+{"input": "점심으로 김치찌개를 먹었다. 국물이 진하고 고기가 부드러웠다. 다음에는 또 오고 싶다.", "cluster_id": 0}
+{"input": "저녁에 친구들과 치킨을 시켜 먹었다. 양이 많고 바삭해서 만족스러웠다.", "cluster_id": 0}
+{"input": "이탈리안 레스토랑에 갔다. 파스타와 피자가 정말 맛있었다. 분위기도 좋았다.", "cluster_id": 0}
+{"input": "파이썬으로 머신러닝을 공부하고 있다. 데이터 전처리가 가장 어렵다. 그래도 재미있다.", "cluster_id": 1}
+{"input": "딥러닝 모델의 성능을 개선했다. 하이퍼파라미터 튜닝이 효과적이었다.", "cluster_id": 1}
+{"input": "자연어 처리를 위해 Sentence-BERT를 사용하고 있다. 임베딩 성능이 매우 좋다.", "cluster_id": 1}
+{"input": "주식 시장이 크게 하락했다. 투자 심리가 위축되고 있다. 당분간 변동성이 클 것 같다.", "cluster_id": 1}
+{"input": "비트코인 가격이 다시 상승했다. 가상자산 시장에 관심이 몰리고 있다.", "cluster_id": 1}
+{"input": "환율 변동이 심해지고 있다. 수입 기업들의 부담이 커지고 있다.", "cluster_id": 1}
+{"input": "The weather is really nice today. The sky is clear and blue. I decided to take a walk.", "cluster_id": 0}
+{"input": "It rained all day. I forgot my umbrella and got completely soaked.", "cluster_id": 1}
+{"input": "The temperature dropped suddenly. It feels much colder than yesterday.", "cluster_id": 1}
+{"input": "I had pasta for lunch. The sauce was rich and delicious. I would love to visit again.", "cluster_id": 0}
+{"input": "We ordered fried chicken for dinner. It was crispy and well seasoned.", "cluster_id": 0}
+{"input": "The restaurant had a great atmosphere. The food was amazing and fresh.", "cluster_id": 0}
+{"input": "I am studying machine learning with Python. Data preprocessing is harder than expected.", "cluster_id": 1}
+{"input": "The deep learning model achieved better accuracy. Hyperparameter tuning really helped.", "cluster_id": 1}
+{"input": "Sentence embeddings are useful for text clustering. SBERT works very well.", "cluster_id": 1}
+{"input": "The stock market dropped significantly today. Investors are getting nervous.", "cluster_id": 1}
+{"input": "Bitcoin prices are rising again. The crypto market is becoming volatile.", "cluster_id": 1}
+{"input": "Exchange rates are fluctuating rapidly. Global markets are reacting.", "cluster_id": 1}
+{"input": "오늘은 회의가 많았다. 프로젝트 일정에 대해 논의했다. 생각보다 시간이 오래 걸렸다.", "cluster_id": 1}
+{"input": "팀원들과 협업이 잘 되고 있다. 커뮤니케이션이 프로젝트 성공의 핵심이다.", "cluster_id": 1}
+{"input": "I had a meeting all morning. We discussed the project timeline in detail.", "cluster_id": -1}
+{"input": "Team collaboration is going well. Clear communication makes everything easier.", "cluster_id": 1}
+{"input": "파이썬으로 데이터 분석을 진행했다. 판다스와 넘파이를 활용했다. 결과가 만족스럽다.", "cluster_id": 1}
+{"input": "I analyzed the dataset using pandas and numpy. The results were quite interesting.", "cluster_id": 1}
